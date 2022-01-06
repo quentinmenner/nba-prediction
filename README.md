@@ -1,5 +1,5 @@
 # Prédiction sur les résultats de la NBA
-  Le rapport est disponible dans le fichier NBA Prediction, Rapport .ipynb.
+  Le rapport est disponible dans le fichier NBA Prediction, Rapport .ipynb. Le dossier images contient les tableaux utilisés dans le rapport.
 
 
 ## Webscraping
