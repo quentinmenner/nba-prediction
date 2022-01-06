@@ -5,7 +5,7 @@
 ## Webscraping
 Les webscraping menant à la création des deux dataframe (stats-equipes-par-mois.csv et stats-matchs.csv) contenant les données sont disponibles dans webscraping-equipes.ipynb et webscraping-match.ipynb. Le fichier chromedriver.exe est nécessaire pour utiliser sélenium.
 
-## Statistiques Descriptives*
+## Statistiques Descriptives
 L'intégralité du code concernant les statistiques descriptives est contenu dans le fichier Statistiques descriptives.ipynb. Il utilise le tableau tableaupython.csv qui contient les équipes premières de la saison régulière de 2005 à 2019. 
 
 ## Modèle
