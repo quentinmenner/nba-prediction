@@ -1,6 +1,21 @@
 # Rapport projet Python
+
 ## Introduction
+
 
 ## Récupération de données
 
-## R
+
+## Statistiques descriptives
+
+
+## Modélisation
+### Choix des modèles
+
+### Résultats
+
+
+## Conclusion
+
+
+## Annexes
