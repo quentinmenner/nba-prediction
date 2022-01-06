@@ -1,8 +1,7 @@
 # Prédiction sur les résultats de la NBA
 ## Projet de Python pour le Data Scientist - Janvier 2022 - Nicolas Drettakis et Quentin Menner
 
-Le rapport est disponible dans le fichier rapport.md. Le dossier images contient les tableaux utilisés dans le rapport.
-
+Le rapport est disponible dans le fichier rapport.md.
 ### Webscraping
 Les programmes de webscraping menant à la création des deux dataframes (`stats-equipes-par-mois.csv` et `stats-matchs.csv`) contenant les données sont disponibles dans `webscraping-equipes.ipynb` et `webscraping-match.ipynb`. Le fichier `chromedriver.exe` est nécessaire pour utiliser sélenium.
 
