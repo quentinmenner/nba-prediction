@@ -18,7 +18,7 @@ Dans le cadre de notre projet nous avons privilégié les statistiques globales 
 
 Concernant le type de saison, il nous a semblé plus intéressant de ne choisir qu’un seul type de saison: en effet les modalités de chaque type de saison comme les enjeux sont différents pour chaque type de saison, ce qui pourrait modifier les statistiques des équipes. La prédiction de matchs de “playoffs” à partir de matchs de saison régulière par exemple pourrait ainsi être faussée par les différences entre ces deux types de saison. Dans le cadre de notre projet, nous avons donc privilégié la saison régulière qui est la plus importante en nombre de matchs, ce qui serait un avantage quand il nous faudra “entraîner” le modèle.
 
-![Données d'équipes](/images/tableau-equipes.png "Statistiques d'équipes")
+![Données d'équipes](/images/tableau_equipes.png "Statistiques d'équipes")
 
 Concernant les matchs, de nombreuses données sont disponibles également mais seules certaines données sont nécessaires : les équipes jouant le match, la date et les points marqués par chaque équipe pour déterminer le gagnant.
 
