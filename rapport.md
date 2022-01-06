@@ -9,7 +9,7 @@ Pour cela nous avons d’abord extrait les données et les avons nettoyés (I.) 
 
 
 ## Récupération de données
-Les données portant sur la NBA étaient nombreuses et étaient disponibles sur différents sites internet. Sur le site officiel de la NBA par exemple (https://www.nba.com/stats/), de très nombreuses données sont disponibles sur les joueurs, les équipes ainsi que les matchs. Ces données peuvent être filtré selon différents critères :
+Les données portant sur la NBA étaient nombreuses et étaient disponibles sur différents sites internet. Sur [le site officiel](https://www.nba.com/stats/) de la NBA par exemple, de très nombreuses données sont disponibles sur les joueurs, les équipes ainsi que les matchs. Ces données peuvent être filtré selon différents critères :
 - par saison, une saison commençant souvent la plupart du temps en octobre et se termine en avril-mai. Ces données sont aussi disponibles mois par mois.
 - par type de saison, une saison de NBA est divisée en plusieurs périodes, notamment une pré-saison, une saison régulière et les “playoffs”.
 - par “mode” : les statistiques sont mesurées par match, pour 48 minutes, par minute, etc…
