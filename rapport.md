@@ -1,7 +1,7 @@
 # Rapport projet Python
 
 ## Introduction
-Pour choisir le sujet nous avions dès le début une volonté de travailler sur un sport et sur la prédiction de résultats. Notre choix s’est porté sur le basketball et plus particulièrement la NBA (le championnat américain de basketball) pour plusieurs raisons. Premièrement, le basketball est un des sports les plus “prévisible” comme le décrit cet article (voir cet article : https://www.actionnetwork.com/general/futures-betting-odds-sports-parity-nba-nfl-mlb-nhl-golf-tennis ). Cela est certainement dû au fait que le nombre de points dans un match est très élevé par rapport à d’autres sports comme le football. Ensuite la NBA, comme tous les sports américains, possède un répertoire de statistiques assez impressionnant et disponible en accès libre sur internet ce qui était parfait dans le cadre d’un projet de Data Science.
+Pour choisir le sujet nous avions dès le début une volonté de travailler sur un sport et sur la prédiction de résultats. Notre choix s’est porté sur le basketball et plus particulièrement la NBA (le championnat américain de basketball) pour plusieurs raisons. Premièrement, le basketball est un des sports les plus “prévisible” comme le décrit cet article (voir cet article : https://www.actionnetwork.com/general/futures-betting-odds-sports-parity-nba-nfl-mlb-nhl-golf-tennis). Cela est certainement dû au fait que le nombre de points dans un match est très élevé par rapport à d’autres sports comme le football. Ensuite la NBA, comme tous les sports américains, possède un répertoire de statistiques assez impressionnant et disponible en accès libre sur internet ce qui était parfait dans le cadre d’un projet de Data Science.
 
 Nous nous sommes donc demandé : Peut-on prévoir les résultats d’un match de sport à partir des performances précédentes de chaque équipe ? Aussi, est-ce que les résultats d’un match sont principalement le fruit du hasard ou est-ce que l’issue d’un match est déterminée par des caractéristiques d’une équipe tangibles et statistiques ?
 
@@ -40,34 +40,24 @@ Pour commencer, nous avons travaillé sur le dataframe “stats_matchs” qui re
 
 ![Moyennes PTS](/images/moyennePTS.jpg "Moyennes PTS")
 
-moyennePTS.jpg
-
 Comme nous le voyons, le nombre de points marqués augmente significativement au cours du temps, ce qui est à prendre en compte dans nos futures analyses. Ensuite, comme prévu dans notre démarche, on calcule la moyenne de points marqués chaque année par l’équipe première de la saison régulière (ici pour la conférence Est)
 
 ![Moyennes PTS 1er](/images/moyennePTS1ER.jpg "Moyennes PTS 1er")
 
-moyennePTS1ER.jpg
-
 Assez logiquement, on observe que les moyennes des équipes premières sont à chaque fois plutôt supérieures aux moyennes globales. 
  
-Nous avons ensuite travaillé sur l’autre dataframe (stats_équipe_par_mois) qui est composé de différentes variables des équipes de NBA chaque mois (elles sont détaillées plus haut et dans le lexique). Toujours dans la même optique, nous avons cherché à calculer la moyenne des variables pour l’équipe première du championnat afin de pouvoir la comparer, nous avons commencé avec la variable FGM (voir lexique) en calculant donc la moyenne du 1er chaque année
+Nous avons ensuite travaillé sur l’autre dataframe (stats_équipe_par_mois) qui est composé de différentes variables des équipes de NBA chaque mois (elles sont détaillées plus haut et dans le lexique). Toujours dans la même optique, nous avons cherché à calculer la moyenne des variables pour l’équipe première du championnat afin de pouvoir la comparer, nous avons commencé avec la variable FGM (voir lexique) en calculant donc la moyenne de la première équipe chaque année :
 
 ![Moyenne FGM](/images/moyenneFGM.jpg "Moyenne FGM")
 
-moyenneFGM.jpg
-
-puis en calculant la moyenne des autres équipes, avant d’automatiser le processus pour l’avoir pour toutes les variables et stocker ces moyennes dans une liste (pour le premier et pour toutes les autres équipes). Pour cela, voir le fichier statistiques descriptives.
+Puis en calculant la moyenne des autres équipes, avant d’automatiser le processus pour l’avoir pour toutes les variables et stocker ces moyennes dans une liste (pour le premier et pour toutes les autres équipes). Pour cela, voir le fichier statistiques descriptives.
 Ainsi nous pouvions comparer ces valeurs afin de déterminer les variables déterminantes dans les victoires. Pour cela nous avons d’abord essayé de faire la somme des différences entre les moyennes de chaque variable pour le premier et pour toutes les autres équipes. Mais certaines variables étant en pourcentage d’autres non, le résultat est dur à lire : 
 
 ![Ecart](/images/ecart.jpg "Ecart")
 
-ecart.jpg
-
 Nous avons donc décidé, pour chaque variable, de faire la moyenne des rapports entre la moyenne du 1er et la moyenne globale (incluant le premier) afin d’obtenir une valeur autour de 1. Si la valeur dépasse 1, plus elle le dépasse plus la variable est significative dans la victoire, si elle est très proche de 1 ou en dessous elle est peu significative. 
 
 ![Moyenne pondérée](/images/moyenneponderee.jpg "Moyenne pondérée")
-
-moyenneponderee.jpg
 
 Plusieurs choses ; tout d’abord on remarque certaines choses assez logiques : le pourcentage de victoire, le nombre de victoires sont très positivement significatifs là ou à l’inverse le pourcentage de défaite et le nombre de défaite sont très négativement significatifs. Ensuite les valeurs absurdes de la variable ‘+/-’ (la différence de points) sont dus à la structure de la variable. En effet, la moyenne de la différence de points sur toutes les équipes est obligatoirement très proche de 0 (étant donné qu’il y a autant de point encaissés que marqués) la différence avec 0 est due aux différents arrondis. Or la différence de points du 1er de chaque année est en général comprise entre 5 et 20 (étant donné qu’il gagne la majorité de ses matchs) ce qui donne la division d’un réel entre 5 et 20 par une quantité très proche de 0 et donc cela explique ces valeurs absurdes (et les valeurs du tableaux d’avant par la même occasion).
 
