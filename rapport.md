@@ -45,8 +45,44 @@ Dans le cas du premier modèle, le Random Forest arrive à prédire justement 71
 
 Concernant le deuxième modèle, le Random Forest prédit correctement 273 matchs sur 461 matchs durant la deuxième partie de la saison 2018-2019 soit un “accuracy score” de 59%. Ce modèle n’est donc pas particulièrement meilleur que le premier si l’on ajoute les équipes. Cela est sûrement dû au fait qu’ici, le dataset d'entraînement est bien moins important que dans le premier modèle (seulement les matchs de la moitié d’une saison). Cependant le modèle prédit toujours plus de 50% des matchs et est donc plus efficace que si la prédiction était faite de manière totalement aléatoire. 
 
+![Importance des variables](/images/importances.png)
+
+Concernant l’importance relative de chaque variable dans les deux modèles, on observe dans les deux cas que les mêmes variables qu’elles concernent l’équipe 1 ou l’équipe 2 ont à peu près la même importance. Cela montre que l’équipe Visiteur ou l’équipe à domicile ont à peu près les mêmes chances de gagner à statistique égale. On observe quelques exceptions notamment dans le deuxième modèle dans le cas des statistiques +/- et WIN%.
+Globalement, les variables qui semblent avoir le plus d’importance dans les deux modèles sont +/-  (différence entre le nombre de points marqués et le nombre de points pris), WIN% .(pourcentage de victoires). Cela semble cohérent avec les résultats des statistiques descriptives notamment pour la variable WIN% ou nous avions remarqué que l’équipe ayant la plus haute valeur de WIN% avait en moyenne une valeur de WIN% plus élevé de 47% que la moyenne générale des équipes. Pour les autres variables, l’écart à la moyenne générale de la meilleure équipe était d’environ + ou - 10%. Les meilleures équipes semblent donc se distinguer particulièrement avec la variable WIN% et le pourcentage de victoires durant les matchs récents est clairement un indice de la réussite des matchs futurs. 
+
+De manière générale, on observe que les variables semblent toutes avoir une certaine importance compris entre 1% et 4% y compris les variables indiquant l’équipe dans le modèle même si celles-ci ne sont pas déterminantes pour déterminer l’issue des matchs.
 
 ## Conclusion
-
+Pour conclure, il semble bien d’après nos modèles que l’on puisse prévoir les résultats de matchs à partir des performances passées des équipes. Toutefois la justesse des modèles reste assez faible et ils nécessiteraient certainement plus de statistiques concernant les équipes ou peut-être même les joueurs pris individuellement ou de ne pas se limiter aux statistiques du mois précédent pour prédire les résultats. Au-delà du choix des données, le choix de la technique pourrait aussi être interrogé. En modifiant les paramètres du Random Forest ou en choisissant une toute autre technique de machine-learning, nous obtiendrions peut-être une meilleure justesse dans les prédictions. Enfin, il serait intéressant d’observer si les modèles développés fonctionneraient de la même manière pour la période des “playoffs” dont le fonctionnement est un peu différent de la saison régulière ou bien même encore pour un tout autre sport.
 
 ## Annexes
+### Glossaire des statistiques
+| Statistique | Définition |
+|---|---|
+| GP | Games Played |
+| W | Wins |
+| L | Losses |
+| MIN | Minutes Played |
+| FGM | Field Goals Made |
+| FGA | Field Goals Attempted |
+| FG% | Field Goal Percentage |
+| 3PM | 3 Point Field Goals Made |
+| 3PA | 3 Point Field Goals Attempted |
+| 3P% | 3 Point Field Goals Percentage |
+| FTM | Free Throws Made |
+| FTA | Free Throws Attempted |
+| FT% | Free Throw Percentage |
+| OREB | Offensive Rebounds |
+| DREB | Defensive Rebounds |
+| REB | Rebounds |
+| AST | Assists |
+| TOV | Turnovers |
+| STL | Steals |
+| BLK | Blocks |
+| PF | Personal Fouls |
+| FP | Fantasy Points |
+| DD2 | Double doubles |
+| TD3 | Triple doubles |
+| PTS | Points |
+| +/- | Différence entre le nombre de points marqués et le nombre de points pris |
+| FP | Fantasy Points |
