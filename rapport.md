@@ -18,6 +18,8 @@ Dans le cadre de notre projet nous avons privilégié les statistiques globales 
 
 Concernant le type de saison, il nous a semblé plus intéressant de ne choisir qu’un seul type de saison: en effet les modalités de chaque type de saison comme les enjeux sont différents pour chaque type de saison, ce qui pourrait modifier les statistiques des équipes. La prédiction de matchs de “playoffs” à partir de matchs de saison régulière par exemple pourrait ainsi être faussée par les différences entre ces deux types de saison. Dans le cadre de notre projet, nous avons donc privilégié la saison régulière qui est la plus importante en nombre de matchs, ce qui serait un avantage quand il nous faudra “entraîner” le modèle.
 
+![Données d'équipes](/images/tableau-equipes.png "Statistiques d'équipes")
+
 Concernant les matchs, de nombreuses données sont disponibles également mais seules certaines données sont nécessaires : les équipes jouant le match, la date et les points marqués par chaque équipe pour déterminer le gagnant.
 
 Nous avons donc décidé de récupérer deux types de données : les statistiques concernant les équipes de NBA en saison régulière chaque mois entre octobre et avril (`webscraping-equipes.ipynb`) et les données de matchs de la saison régulière de NBA entre octobre et avril (`webscraping-match.ipynb`). Nous avons récupéré les données entre la saison 2005-2006 et la saison 2018-2019 pour avoir un set de données important. L’objectif de la récupération de ces données est de déterminer si l’on peut déterminer l’issue d’un match à partir des statistiques de l’équipe sur le mois précédent.
@@ -28,6 +30,48 @@ Pour les données de matchs, nous avons décidé de “scraper” le site Basket
 
 
 ## Statistiques descriptives
+Pour traiter les données que nous avons récoltées nous avons choisi de chercher à mettre en évidence les variables les plus déterminantes dans la victoire d’une équipe. Pour cela nous avons à chaque fois essayer d’isoler le premier de la saison régulière (et donc celui qui a le plus de victoires) pour ensuite comparer ses statistiques à celles du reste des équipes. Tout le code utilisé pour faire ce qui est décrit dans cette partie est disponible dans le fichier “statistiques descriptives”, j’en ai extrait certaines sorties (principalement des tableaux).
+
+Avant de commencer à détailler ce que nous avons fait, plusieurs précisions importantes : 
+La saison 2011 n’est pas prise en compte dans la plupart des statistiques calculées car tronquée par une grève générale des joueurs. 
+Dans chaque statistique trouvée il y a les résultats de la conférence est et ouest séparés car elles le sont en saison régulière. Cela nous a aussi permis de comparer certains résultats entre les deux conférences.
+
+Pour commencer, nous avons travaillé sur le dataframe “stats_matchs” qui regroupe les résultats des matchs de NBA de 2005 à aujourd’hui. Il nous a permis de déterminer le nombre de points moyens marqués à l'extérieur et à domicile chaque année. On a ensuite pu calculer le nombre de points moyens en faisant la moyenne des deux (car il y a autant de matchs à l’extérieur qu’à domicile).
+
+![Moyennes PTS](/images/moyennePTS.jpg "Moyennes PTS")
+
+moyennePTS.jpg
+
+Comme nous le voyons, le nombre de points marqués augmente significativement au cours du temps, ce qui est à prendre en compte dans nos futures analyses. Ensuite, comme prévu dans notre démarche, on calcule la moyenne de points marqués chaque année par l’équipe première de la saison régulière (ici pour la conférence Est)
+
+![Moyennes PTS 1er](/images/moyennePTS1ER.jpg "Moyennes PTS 1er")
+
+moyennePTS1ER.jpg
+
+Assez logiquement, on observe que les moyennes des équipes premières sont à chaque fois plutôt supérieures aux moyennes globales. 
+ 
+Nous avons ensuite travaillé sur l’autre dataframe (stats_équipe_par_mois) qui est composé de différentes variables des équipes de NBA chaque mois (elles sont détaillées plus haut et dans le lexique). Toujours dans la même optique, nous avons cherché à calculer la moyenne des variables pour l’équipe première du championnat afin de pouvoir la comparer, nous avons commencé avec la variable FGM (voir lexique) en calculant donc la moyenne du 1er chaque année
+
+![Moyenne FGM](/images/moyenneFGM.jpg "Moyenne FGM")
+
+moyenneFGM.jpg
+
+puis en calculant la moyenne des autres équipes, avant d’automatiser le processus pour l’avoir pour toutes les variables et stocker ces moyennes dans une liste (pour le premier et pour toutes les autres équipes). Pour cela, voir le fichier statistiques descriptives.
+Ainsi nous pouvions comparer ces valeurs afin de déterminer les variables déterminantes dans les victoires. Pour cela nous avons d’abord essayé de faire la somme des différences entre les moyennes de chaque variable pour le premier et pour toutes les autres équipes. Mais certaines variables étant en pourcentage d’autres non, le résultat est dur à lire : 
+
+![Ecart](/images/ecart.jpg "Ecart")
+
+ecart.jpg
+
+Nous avons donc décidé, pour chaque variable, de faire la moyenne des rapports entre la moyenne du 1er et la moyenne globale (incluant le premier) afin d’obtenir une valeur autour de 1. Si la valeur dépasse 1, plus elle le dépasse plus la variable est significative dans la victoire, si elle est très proche de 1 ou en dessous elle est peu significative. 
+
+![Moyenne pondérée](/images/moyenneponderee.jpg "Moyenne pondérée")
+
+moyenneponderee.jpg
+
+Plusieurs choses ; tout d’abord on remarque certaines choses assez logiques : le pourcentage de victoire, le nombre de victoires sont très positivement significatifs là ou à l’inverse le pourcentage de défaite et le nombre de défaite sont très négativement significatifs. Ensuite les valeurs absurdes de la variable ‘+/-’ (la différence de points) sont dus à la structure de la variable. En effet, la moyenne de la différence de points sur toutes les équipes est obligatoirement très proche de 0 (étant donné qu’il y a autant de point encaissés que marqués) la différence avec 0 est due aux différents arrondis. Or la différence de points du 1er de chaque année est en général comprise entre 5 et 20 (étant donné qu’il gagne la majorité de ses matchs) ce qui donne la division d’un réel entre 5 et 20 par une quantité très proche de 0 et donc cela explique ces valeurs absurdes (et les valeurs du tableaux d’avant par la même occasion).
+
+Cependant l’impact de cette variable n’est pas à négliger car la différence de points est nécessairement une valeur élevée pour le premier du championnat. Cependant nous ne pouvons mesurer cette différence avec les outils que nous avons utilisés précédemment de par la particularité structurelle de cette variable (le fait qu’elle soit proche de 0 quand on prend une moyenne globale ou sur toutes les équipes sauf une). Pour contourner cette difficulté on utilise la moyenne des points marqués par saison à laquelle on ajoute la différence du premier avant de rediviser le tout par la moyenne de points marqués dans la saison. On obtient 1,074.
 
 
 ## Modélisation
